@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<body>
+<form action="{% url 'search' %}" method="POST" class="form-inline mt-2 mt-md-0 right">
+        {% csrf_token %}
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="search">Search</button>
+        </form>
+</body>
+</html>

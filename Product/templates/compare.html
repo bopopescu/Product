@@ -1,0 +1,92 @@
+<html>
+<body>
+{% load staticfiles %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'Product/style/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Product/style/css/harvest.css' %}">
+<link rel="stylesheet" href="{% static 'Product/style/css/style.css' %}">
+
+
+<script src="{% static 'Product/style/js/jquery.min.js' %}"></script>
+<script src="{% static 'Product/style/js/bootstrap.min.js' %}"></script>
+
+
+<div class="top-half">
+    <div class="banner-txt">
+        <h1>Compare the price <br>
+             Compare.io</h1>
+    </div>
+    <div class="calculation-container">
+        <form action="{% url 'search' %}" method="POST">
+
+
+            {% csrf_token %}
+            <input type="text" placeholder="Search" name="search">
+            <button><i class="fa fa-search" type="submit" value="search"></i></button>
+            {#            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="search">Search</button>#}
+        </form>
+    </div>
+
+
+    <div class="blncleft">
+        <img src="{% static 'Product/images/compare/pan-bth.png' %}" class="img-responsive pendulum">
+    </div>
+    <div class="blncbase">
+        <img src="{% static 'Product/images/compare/base.png' %}" class="img-responsive">
+    </div>
+    <!--    <div class="blncright">-->
+    <!--        <img src="images/compare/pan-right.png" class="img-responsive">-->
+    <!--    </div>-->
+</div>
+
+<div class="container">
+    <div class="row benefits">
+        <h3 class="text-center">What is compare.io?</h3>
+        <div style="transform:translate(-50%,0);height:2px; left:50%; border-bottom:2px solid #019cff; width:250px;position:relative;top:-20px"></div>
+        <div class="col-md-4">
+            <button disabled>1</button>
+            <h4>About Us</h4>
+            <p>
+                This about us. This about us. This about us. This about us. This about us. This about us. This about us.
+                This about us. This about us. This about us. This about us. This about us. This about us. This about us.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <button disabled>2</button>
+            <h4>Benefits</h4>
+            <p>
+                The ecological benefits of rainwater harvesting are immense. An activity like flushing the toilet, for
+                instance, attributes to about 35% of home water usage. Add up the amount of water used to irrigate the
+                lawn, do laundry, wash cars and the total amount water used is simply astronomical. For businesses, more
+                so hospitality establishments that accommodate a big number of guests in a single location, require a
+                lot of water to satisfy customers. Rainwater harvesting will simply help to fill this gap.
+            </p>
+
+        </div>
+        <div class="col-md-4">
+            <button disabled>3</button>
+            <h4>Why?</h4>
+            <p>
+                Rainwater harvesting systems are considerably easy to maintain since they are not utilized for drinking,
+                cooking or other sensitive uses. This means that they will not need installation of purification
+                systems, which are usually expensive.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.blncleft').delay(500).animate({top: '20%'});
+        $('.blncright').delay(500).animate({top: '21%'});
+
+    });
+    setTimeout(function () {
+        $('.calculation-container').addClass('fade-in');
+    }, 1200);
+    var count = 1;
+</script>
+</body>
+</html>

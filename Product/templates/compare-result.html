@@ -1,0 +1,95 @@
+<html>
+<body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'Product/style/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Product/style/css/harvest.css' %}">
+<link rel="stylesheet" href="{% static 'Product/style/css/style.css' %}">
+
+<script src="{% static 'Product/style/js/jquery.min.js' %}"></script>
+<script src="{% static 'Product/style/js/bootstrap.min.js' %}"></script>
+
+
+
+<div class="section-wrapper sc-rlt">
+    <form action="{% url 'search' %}" method="POST">
+
+  {% csrf_token %}
+            <input type="text" placeholder="Search" name="search">
+        <button><i class="fa fa-search"></i> </button>
+    </form>
+</div>
+
+<div class="wrapper">
+    <div class="comp-card">
+        <div class="sort">
+            <label>Sort by:</label>
+            <select>
+                <option>Cheaper item First</option>
+                <option>Expensive item First</option>
+            </select>
+        </div>
+        <h3>Product from SastoDeal </h3>
+        {% for i in sastodeal %}
+        <div class="product-detail">
+            <div class="product-img">
+                <img src="{{ i.image }}" class="img-responsive img-center">
+            </div>
+            <div class="product-desc">
+                <h5>{{ i.name }}</h5>
+                <h3>{{ i.price }}</h3>
+                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+    <div class="comp-card">
+        <div class="sort">
+            <label>Sort by:</label>
+            <select>
+                <option>Cheaper item First</option>
+                <option>Expensive item First</option>
+            </select>
+        </div>
+        <h3>Product from Hamrobazar</h3>
+            {% for i in hamrobazar %}
+        <div class="product-detail">
+            <div class="product-img">
+                <img src="{{ i.image }}" class="img-responsive img-center">
+            </div>
+            <div class="product-desc">
+                <h5>{{ i.name }}</h5>
+                <h3>{{ i.price }}</h3>
+                <a href="https://www.hamrobazar.com/{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="comp-card">
+        <div class="sort">
+            <label>Sort by:</label>
+            <select>
+                <option>Cheaper item First</option>
+                <option>Expensive item First</option>
+            </select>
+        </div>
+        <h3>Product from Daraz</h3>
+        {% for i in daraz %}
+        <div class="product-detail">
+            <div class="product-img">
+                <img src="{{ i.image }}" class="img-responsive img-center">
+            </div>
+            <div class="product-desc">
+                <h5>{{ i.name }}</h5>
+                <h3>{{ i.price }}</h3>
+                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

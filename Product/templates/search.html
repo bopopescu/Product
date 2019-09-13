@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+
+<h3>Search result from daraz</h3>
+<table border="1">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Link</th>
+    </tr>
+    <tr>
+        <td>{% for i in daraz.daraz_name %}
+            {{ i }}<br>
+        {% endfor %}</td>
+        <td>{% for i in daraz.daraz_price %}
+            {{ i }}<br>
+        {% endfor %}
+        </td>
+        <td>{% for i in daraz.daraz_link %}
+           <a href="{{ i }}">Details</a><br>
+        {% endfor %}
+        </td>
+
+    </tr>
+</table>
+
+
+<h3>Search result from Hamrobazar</h3>
+<table border="1">
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Link</th>
+    </tr>
+    <tr>
+        <td>{% for i in hamrobazar.hamrobazar_image %}
+            <img src = "{{ i }}" height="20px"><br>
+        {% endfor %}</td>
+        <td>{% for i in hamrobazar.hamrobazar_product  %}
+            {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in hamrobazar.hamrobazar_price  %}
+           {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in hamrobazar.hamrobazar_link %}
+           <a href="www.hamrobazar.com/{{ i }}">Details</a><br>
+        {% endfor %}
+        </td>
+
+    </tr>
+</table>
+<h3>Search result from Dokoman </h3>
+
+<table border="1">
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Link</th>
+    </tr>
+    <tr>
+        <td>{% for i in dokoman.dokoman_image %}
+            <img src = "{{ i }}" height="20px"><br>
+        {% endfor %}</td>
+        <td>{% for i in dokoman.dokoman_product  %}
+            {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in dokoman.dokoman_price  %}
+           {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in dokoman.dokoman_link %}
+           <a href="{{ i }}">Details</a><br>
+        {% endfor %}
+        </td>
+    </tr>
+</table>
+
+<h3>Search result from Market Thulo </h3>
+<table border="1">
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Link</th>
+    </tr>
+    <tr>
+        <td>{% for i in markethulo.markethulo_image %}
+            <img src = "{{ i }}" height="20px"><br>
+        {% endfor %}</td>
+        <td>{% for i in markethulo.markethulo_name  %}
+            {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in markethulo.markethulo_price  %}
+           {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in markethulo.markethulo_link %}
+           <a href="{{ i }}">Details</a><br>
+        {% endfor %}
+        </td>
+    </tr>
+</table>
+
+
+<h3>Search result from Muncha </h3>
+<table border="1">
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Link</th>
+    </tr>
+    <tr>
+        <td>{% for i in muncha.muncha_image %}
+            <img src = "{{ i }}" height="20px"><br>
+        {% endfor %}</td>
+        <td>{% for i in muncha.muncha_name  %}
+            {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in muncha.muncha_price  %}
+           {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in muncha.muncha_link %}
+           <a href="{{ i }}">Details</a><br>
+        {% endfor %}
+        </td>
+    </tr>
+</table>
+<h3>Search result from Esewa Pasal</h3>
+<table border="1">
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Link</th>
+    </tr>
+    <tr>
+        <td>{% for i in esewapasal.esewapasal_image %}
+            <img src = "{{ i }}" height="20px"><br>
+        {% endfor %}</td>
+        <td>{% for i in esewapasal.esewapasal_name   %}
+            {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in esewapasal.esewapasal_price  %}
+           {{ i }}<br>
+        {% endfor %}
+        </td>
+       <td>{% for i in esewapasal.esewapasal_link %}
+           <a href="{{ i }}">Details</a><br>
+        {% endfor %}
+        </td>
+    </tr>
+</table>
+</body>
+</html>
