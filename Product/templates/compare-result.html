@@ -12,15 +12,67 @@
 
 
 <div class="section-wrapper sc-rlt">
-    <form action="{% url 'search' %}" method="POST">
-
-  {% csrf_token %}
-            <input type="text" placeholder="Search" name="search">
-        <button><i class="fa fa-search"></i> </button>
-    </form>
+{#    <form action="{% url 'search' %}" method="POST">#}
+{##}
+{#  {% csrf_token %}#}
+{#            <input type="text" placeholder="Search" name="search">#}
+{#        <button><i class="fa fa-search"></i></button>#}
+{#    </form>#}
+     <input type="text" placeholder="Search" id="search" name="search">
+    <button onclick="openmodal()"><i class="fa fa-search"></i></button>
 </div>
+    <div id="myModal" class="modal">
 
+        <!-- Modal content -->
+        <div class="modal-content" id="modal-open">
+            <span class="close">&times;</span>
+            <h2 class="site-select"> Select atmost 3 sites to compare from</h2>
+            <div class="site-type">
+                <form action="{% url 'search' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" id="search_keyword">
+                    <label>
+                        <input type="radio" name="daraz" value="daraz">
+                        <img src="{% static 'Product/images/daraz.png' %}">
+                        <p class="text-center">Daraz</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="sastodeal" value="sastodeal">
+                        <img src="{% static 'Product/images/sd.png' %}">
+                        <p class="text-center">Sasto Deal</p>
+
+                    </label>
+                    <label>
+                        <input type="radio" name="hamrobazar" value="hamrobazar">
+                        <img src="{% static 'Product/images/hamrobazar.png' %}">
+                        <p class="text-center">Hamrobazar</p>
+
+                    </label>
+                    <label>
+                        <input type="radio" name="dokoman" value="dokoman">
+                        <img src="{% static 'Product/images/dokoman.png' %}">
+                        <p class="text-center">Daraz</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="esewapasal" value="esewapasal">
+                        <img src="{% static 'Product/images/esewapasal.png' %}">
+                        <p class="text-center">Esewapasal</p>
+
+                    </label>
+                    <label>
+                        <input type="radio" name="muncha" value="muncha">
+                        <img src="{% static 'Product/images/muncha.png' %}">
+                        <p class="text-center">Muncha</p>
+
+                    </label>
+                    <button><i class="fa fa-search" type="submit" value="search"></i></button>
+                </form>
+            </div>
+        </div>
+
+    </div>
 <div class="wrapper">
+{% if display.sastodeal == True %}
     <div class="comp-card">
         <div class="sort">
             <label>Sort by:</label>
@@ -29,8 +81,8 @@
                 <option>Expensive item First</option>
             </select>
         </div>
-        <h3>Product from SastoDeal </h3>
-        {% for i in sastodeal %}
+        <h3>Products from SastoDeal </h3>
+        {% for i in site.sastodeal %}
         <div class="product-detail">
             <div class="product-img">
                 <img src="{{ i.image }}" class="img-responsive img-center">
@@ -45,6 +97,8 @@
 
 
     </div>
+{% endif %}
+{% if display.hamrobazar == True %}
     <div class="comp-card">
         <div class="sort">
             <label>Sort by:</label>
@@ -53,8 +107,8 @@
                 <option>Expensive item First</option>
             </select>
         </div>
-        <h3>Product from Hamrobazar</h3>
-            {% for i in hamrobazar %}
+        <h3>Products from Hamrobazar</h3>
+            {% for i in site.hamrobazar %}
         <div class="product-detail">
             <div class="product-img">
                 <img src="{{ i.image }}" class="img-responsive img-center">
@@ -68,6 +122,9 @@
         {% endfor %}
 
     </div>
+{% endif %}
+    {% if display.daraz == True %}
+
     <div class="comp-card">
         <div class="sort">
             <label>Sort by:</label>
@@ -76,8 +133,8 @@
                 <option>Expensive item First</option>
             </select>
         </div>
-        <h3>Product from Daraz</h3>
-        {% for i in daraz %}
+        <h3>Products from Daraz</h3>
+        {% for i in site.daraz %}
         <div class="product-detail">
             <div class="product-img">
                 <img src="{{ i.image }}" class="img-responsive img-center">
@@ -90,6 +147,143 @@
         </div>
         {% endfor %}
     </div>
+{% endif %}
+
+
+  {% if display.muncha == True %}
+
+    <div class="comp-card">
+        <div class="sort">
+            <label>Sort by:</label>
+            <select>
+                <option>Cheaper item First</option>
+                <option>Expensive item First</option>
+            </select>
+        </div>
+        <h3>Product from Muncha</h3>
+        {% for i in site.muncha %}
+        <div class="product-detail">
+            <div class="product-img">
+                <img src="{{ i.image }}" class="img-responsive img-center">
+            </div>
+            <div class="product-desc">
+                <h5>{{ i.name }}</h5>
+                <h3>{{ i.price }}</h3>
+                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{#  {% if display.dokoman == True %}#}
+{##}
+{#    <div class="comp-card">#}
+{#        <div class="sort">#}
+{#            <label>Sort by:</label>#}
+{#            <select>#}
+{#                <option>Cheaper item First</option>#}
+{#                <option>Expensive item First</option>#}
+{#            </select>#}
+{#        </div>#}
+{#        <h3>Products from Dokoman</h3>#}
+{#        {% for i in site.dokoman %}#}
+{#        <div class="product-detail">#}
+{#            <div class="product-img">#}
+{#                <img src="{{ i.image }}" class="img-responsive img-center">#}
+{#            </div>#}
+{#            <div class="product-desc">#}
+{#                <h5>{{ i.name }}</h5>#}
+{#                <h3>{{ i.price }}</h3>#}
+{#                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endif %}#}
+{##}
+{#  {% if display.marketthulo == True %}#}
+{#    <div class="comp-card">#}
+{#        <div class="sort">#}
+{#            <label>Sort by:</label>#}
+{#            <select>#}
+{#                <option>Cheaper item First</option>#}
+{#                <option>Expensive item First</option>#}
+{#            </select>#}
+{#        </div>#}
+{#        <h3>Products from Market Thulo</h3>#}
+{#        {% for i in site.marketthulo %}#}
+{#        <div class="product-detail">#}
+{#            <div class="product-img">#}
+{#                <img src="{{ i.image }}" class="img-responsive img-center">#}
+{#            </div>#}
+{#            <div class="product-desc">#}
+{#                <h5>{{ i.name }}</h5>#}
+{#                <h3>{{ i.price }}</h3>#}
+{#                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endif %}#}
+{#  {% if display.esewapasal == True %}#}
+{##}
+{#    <div class="comp-card">#}
+{#        <div class="sort">#}
+{#            <label>Sort by:</label>#}
+{#            <select>#}
+{#                <option>Cheaper item First</option>#}
+{#                <option>Expensive item First</option>#}
+{#            </select>#}
+{#        </div>#}
+{#        <h3>Products from Esewapasal</h3>#}
+{#        {% for i in site.esewapasl %}#}
+{#        <div class="product-detail">#}
+{#            <div class="product-img">#}
+{#                <img src="{{ i.image }}" class="img-responsive img-center">#}
+{#            </div>#}
+{#            <div class="product-desc">#}
+{#                <h5>{{ i.name }}</h5>#}
+{#                <h3>{{ i.price }}</h3>#}
+{#                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endif %}#}
 </div>
+<script>
+     function openmodal(){
+        console.log($('#search').val());
+        $('#search_keyword').val($('#search').val());
+        console.log($('#search_keyword').val());
+        modal.style.display = "block";
+    }
+ // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
+

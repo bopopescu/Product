@@ -2,6 +2,7 @@ import re
 from time import sleep
 
 from django.contrib.sites import requests
+from django.http import request
 from django.test import TestCase
 from django.shortcuts import render
 from bs4 import BeautifulSoup
@@ -404,57 +405,349 @@ import re
 # ob.run()
 
 
-class Sastodeal():
-    def run(self):
-        browser = webdriver.PhantomJS()
-        browser.delete_all_cookies()
-        browser.get(
-            'https://www.sastodeal.com/search.html?q=shirt&hpp=16&idx=sastodeal_products&p=0&is_v=1&isProduct=N')
-        c = browser.page_source
-        soup = BeautifulSoup(c, "html.parser")
+# class Sastodeal():
+#     def run(self):
+#         browser = webdriver.PhantomJS()
+#         browser.delete_all_cookies()
+#         browser.get(
+#             'https://www.sastodeal.com/search.html?q=shirt&hpp=16&idx=sastodeal_products&p=0&is_v=1&isProduct=N')
+#         c = browser.page_source
+#         soup = BeautifulSoup(c, "html.parser")
+#
+#         sastodeal_image_list = []
+#         sastodeal_name_list = []
+#         sastodeal_price_list = []
+#         sastodeal_link_list = []
+#
+#         sastodeal_product_image = soup.select('#hits img')
+#         sastodeal_product_name = soup.select("#hits a")
+#         sastodeal_product_price = soup.select(".product-price")
+#
+#         for i in sastodeal_product_image:
+#             image = i.get('src')
+#             sastodeal_image_list.append(image)
+#
+#
+#         for k in sastodeal_product_name:
+#             links = k.get('href')
+#             sastodeal_link_list.append(links)
+#
+#         for j in sastodeal_product_name:
+#             name = j.text
+#             if name != '':
+#                 sastodeal_name_list.append(name)
+#
+#         print(sastodeal_name_list)
+#
+#         for l in sastodeal_product_price:
+#             price = l.text
+#             orginal_price = price.split('रु')
+#             new_price = (orginal_price[1])
+#             sastodeal_price_list.append(new_price)
+#
+#         sastodeal_data = []
+#         for w,x,y,z in zip(sastodeal_image_list,sastodeal_name_list, sastodeal_price_list, sastodeal_link_list):
+#             temp ={
+#                 'image': w,
+#                 'name': x,
+#                 'price': y,
+#                 'link': z
+#             }
+#             sastodeal_data.append(temp)
+#         print(sastodeal_data)
+#
+#
+# ob = Sastodeal()
+# ob.run()
+#
+# from imageai.Detection import ObjectDetection
+# import os
+#
+# execution_path = os.getcwd()
+#
+# detector = ObjectDetection()
+# detector.setModelTypeAsRetinaNet()
+# detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
+# detector.loadModel()
+# detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , "image.jpg"), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
+#
+# for eachObject in detections:
+#     print(eachObject["name"] , " : " , eachObject["percentage_probability"] )
 
-        sastodeal_image_list = []
-        sastodeal_name_list = []
-        sastodeal_price_list = []
-        sastodeal_link_list = []
+#
+# class Sastodeal():
+#     def run(self):
+#         browser = webdriver.PhantomJS()
+#         browser.delete_all_cookies()
+#         browser.get(
+#             'https://www.sastodeal.com/search.html?q=shampoo&hpp=16&idx=sastodeal_products&p=0&is_v=1&isProduct=N')
+#         c = browser.page_source
+#         soup = BeautifulSoup(c, "html.parser")
+#
+#         sastodeal_image_list = []
+#         sastodeal_name_list = []
+#         sastodeal_price_list = []
+#         sastodeal_link_list = []
+#
+#         sastodeal_product_image = soup.select('#hits img')
+#         sastodeal_product_name = soup.select("#hits a")
+#         sastodeal_product_price = soup.select(".product-price")
+#
+#         for i in sastodeal_product_image:
+#             image = i.get('src')
+#             sastodeal_image_list.append(image)
+#
+#         for k in sastodeal_product_name:
+#             links = k.get('href')
+#             sastodeal_link_list.append(links)
+#
+#         print(sastodeal_link_list)
+#         sastodeals = list(dict.fromkeys(sastodeal_link_list))
+#
+#         print(sastodeals)
+#
+#         for j in sastodeal_product_name:
+#             name = j.text
+#             if name != '':
+#                 sastodeal_name_list.append(name)
+#
+#
+#         for l in sastodeal_product_price:
+#             price = l.text
+#             orginal_price = price.split('रु')
+#             new_price = 'Rs' + (orginal_price[1])
+#             sastodeal_price_list.append(new_price)
+#
+#         sastodeal_data = []
+#         for w,x,y,z in zip(sastodeal_image_list,sastodeal_name_list, sastodeal_price_list, sastodeals):
+#             temp ={
+#                 'image': w,
+#                 'name': x,
+#                 'price': y,
+#                 'link': z
+#             }
+#             sastodeal_data.append(temp)
+#         print(sastodeal_data)
+#         return (sastodeal_data)
+#
+# sasto = Sastodeal()
+# sasto.run()
+# searchData = request.POST.get('search')
+# browser = webdriver.PhantomJS()
+# browser.delete_all_cookies()
+# browser.get(
+#     'https://www.daraz.com.np/catalog/?q=shampoo&_keyori=ss&from=input&spm=a2a0e.11779170.search.go.15bb2d2bkd76XX')
+# c = browser.page_source
+# soup = BeautifulSoup(c, "html.parser")
+#
+# daraz_name_list = []
+# daraz_price_list = []
+# daraz_link_list = []
+# daraz_image_list = []
+# daraz_product_name = soup.select("div .c16H9d a")
+# daraz_product_price = soup.select("div .c3gUW0 .c13VH6")
+#
+#
+# daraz_image = soup.select('script', type="application/ld+json")
+# # for i in daraz_image:
+# #     print(i)
+# image = str(daraz_image[17])
+# print(image)
+# print(image.split())
+# print('first')
+# pattern = '"image":"https://static-01.daraz.com.np/p/'
+# res = [x for x in image.split() if re.search(pattern, x)]
+# print('res')
+# print(res)
+# for x in res:
+#     var = (x.split(','))
+#     print('var1')
+#     print(var)
+#     var2 = [x for x in var if '"image":' in x]
+#     var2 = var2[0]
+#     var3 = var2[9:-1]
+#     print('var3')
+#
+#     print(var3)
+#     daraz_image_list.append(var3)
+#
+# for product in daraz_product_name:
+#     daraz_name_list.append(product.text)
+# for price in daraz_product_price:
+#     daraz_price_list.append(price.text)
+#
+# link = soup.find_all('div', class_='c16H9d')
+# for i in link:
+#     for a in i.find_all('a'):
+#         href = (a.get('href'))
+#         daraz_link_list.append(href)
+#
+# daraz_data = []
+# for w, x, y, z in zip(daraz_image_list, daraz_name_list, daraz_price_list, daraz_link_list):
+#     temp = {
+#         'image': w,
+#         'name': x,
+#         'price': y,
+#         'link': z
+#     }
+#     daraz_data.append(temp)
+#
+# print(daraz_data)
+# def dokoman():
+#         browser = webdriver.PhantomJS()
+#         browser.delete_all_cookies()
+#         browser.get(
+#             'https://dokoman.com/search?searhkey=joystick')
+#         c4 = browser.page_source
+#         soup4 = BeautifulSoup(c4, "html.parser")
+#         dokoman_name_list = []
+#         dokoman_price_list = []
+#         dokoman_image_list = []
+#         dokoman_link_list = []
+#
+#         dokoman_product_name = soup4.select("#post-data a")
+#         dokoman_product_price = soup4.select(".product-price-net")
+#         dokoman_product_image = soup4.select("img.img-responsive.center-block")
+#         dokoman_product_link = soup4.select('#post-data a')
+#
+#         for i in dokoman_product_name:
+#             items = i.text
+#             j = re.sub(r"\s", "", items)
+#             spl = j.split('(')[0]
+#             if spl != '':
+#                 dokoman_name_list.append(spl)
+#
+#         for i in dokoman_product_price:
+#             items = i.text
+#             j = re.sub(r"\s", "", items)
+#             spl = j.split('(')[0]
+#             dokoman_price_list.append(spl)
+#
+#         for i in dokoman_product_image:
+#             items = i.text
+#             image = (i.get('src'))
+#             dokoman_image_list.append(image)
+#
+#         for i in dokoman_product_link:
+#             link = i.get('href')
+#             if link != '#':
+#                 dokoman_link_list.append(link)
+#         dokoman_data = []
+#         for w, x, y, z in zip(dokoman_image_list, dokoman_name_list, dokoman_price_list, dokoman_link_list):
+#             temp = {
+#                 'image': w,
+#                 'name': x,
+#                 'price': y,
+#                 'link': z
+#             }
+#             dokoman_data.append(temp)
+#         return dokoman_data
+#
+# print(dokoman())
 
-        sastodeal_product_image = soup.select('#hits img')
-        sastodeal_product_name = soup.select("#hits a")
-        sastodeal_product_price = soup.select(".product-price")
+# class Daraz():
+# #     def run():
+# #         browser = webdriver.PhantomJS()
+# #         browser.delete_all_cookies()
+# #         browser.get(
+# #             'https://www.daraz.com.np/catalog/?q=shampoo&_keyori=ss&from=input&spm=a2a0e.11779170.search.go.15bb2d2bkd76XX')
+# #         c = browser.page_source
+# #         soup = BeautifulSoup(c, "html.parser")
+# #         daraz_name_list = []
+# #         daraz_price_list = []
+# #         daraz_link_list = []
+# #         daraz_image_list = []
+# #         daraz_product_name = soup.select("div .c16H9d a")
+# #         daraz_product_price = soup.select("div .c3gUW0 .c13VH6")
+# #
+# #         daraz_image = soup.select('script', type="application/ld+json")
+# #         image = str(daraz_image[17])
+# #         # print(image.split())
+# #         pattern = '"image":"https://static-01.daraz.com.np/'
+# #         res = [x for x in image.split() if re.search(pattern, x)]
+# #         for x in res:
+# #             var = (x.split(','))
+# #             var2 = [x for x in var if '"image":' in x]
+# #             var2 = var2[0]
+# #             var3 = var2[9:-1]
+# #             daraz_image_list.append(var3)
+# #
+# #         for product in daraz_product_name:
+# #             daraz_name_list.append(product.text)
+# #         for price in daraz_product_price:
+# #             daraz_price_list.append(price.text)
+# #
+# #         link = soup.find_all('div', class_='c16H9d')
+# #         for i in link:
+# #             for a in i.find_all('a'):
+# #                 href = (a.get('href'))
+# #                 daraz_link_list.append(href)
+# #
+# #         daraz_data =[]
+# #         for w, x, y, z in zip(daraz_image_list, daraz_name_list, daraz_price_list, daraz_link_list):
+# #             temp = {
+# #                 'image': w,
+# #                 'name': x,
+# #                 'price': y,
+# #                 'link': z
+# #             }
+# #             daraz_data.append(temp)
+# #         return daraz_data
+# #
+# #
+# # d = Daraz.run()
+# # print(d)
 
-        for i in sastodeal_product_image:
-            image = i.get('src')
-            sastodeal_image_list.append(image)
+def run():
+    browser = webdriver.PhantomJS()
+    browser.delete_all_cookies()
+    browser.get('https://market.thulo.com/shopping/search?q=shirt')
+    c6 = browser.page_source
+    soup6 = BeautifulSoup(c6, "html.parser")
+
+    market_thulo_price = soup6.select('.thirdGridActive span')
+    market_thulo_product = soup6.select('h4 a')
+    market_thulo_link = soup6.select('h4 a')
+
+    market_thulo_image_list = []
+    market_thulo_price_list = []
+    market_thulo_product_list = []
+    market_thulo_link_list = []
+
+    for j in market_thulo_product:
+        item = j.text
+        if item != '':
+            market_thulo_product_list.append(item)
+    for i in market_thulo_price:
+        items = i.text
+        if items != '×':
+            if items != '':
+                market_thulo_price_list.append(items)
+
+    for i in market_thulo_link:
+        item = (i.get('href'))
+        market_thulo_link_list.append(item)
 
 
-        for k in sastodeal_product_name:
-            links = k.get('href')
-            sastodeal_link_list.append(links)
+    market_thulo_link_list.pop(0)
 
-        for j in sastodeal_product_name:
-            name = j.text
-            if name != '':
-                sastodeal_name_list.append(name)
+    marketthulo_data = []
 
-        print(sastodeal_name_list)
+    print(market_thulo_image_list)
+    print(market_thulo_product_list)
+    print(market_thulo_price_list)
+    print(market_thulo_link_list)
 
-        for l in sastodeal_product_price:
-            price = l.text
-            orginal_price = price.split('रु')
-            new_price = (orginal_price[1])
-            sastodeal_price_list.append(new_price)
-
-        sastodeal_data = []
-        for w,x,y,z in zip(sastodeal_image_list,sastodeal_name_list, sastodeal_price_list, sastodeal_link_list):
-            temp ={
-                'image': w,
-                'name': x,
-                'price': y,
-                'link': z
-            }
-            sastodeal_data.append(temp)
-        print(sastodeal_data)
+    for w, x, y, z in zip(market_thulo_image_list, market_thulo_product_list, market_thulo_price_list,
+                          market_thulo_link_list):
+        temp = {
+            'image': w,
+            'name': x,
+            'price': y,
+            'link': z
+        }
+        marketthulo_data.append(temp)
+    return marketthulo_data
 
 
-ob = Sastodeal()
-ob.run()
+print(run())

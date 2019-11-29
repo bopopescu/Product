@@ -15,17 +15,71 @@
 <div class="top-half">
     <div class="banner-txt">
         <h1>Compare the price <br>
-             Compare.io</h1>
+        </h1>
     </div>
     <div class="calculation-container">
-        <form action="{% url 'search' %}" method="POST">
+        {#            <input type="checkbox" name="daraz" value="daraz">Daraz<br>#}
+        {#            <input type="checkbox" name="hamrobazar" value="hamrobazar">Hamro Bazar<br>#}
+        {#            <input type="checkbox" name="sastodeal" value="sastodeal" > Sasto Deal<br>#}
+        {#            <input type ="checkbox" name="dokoman" value ="dokoman">Dokoman<br>#}
+        {#            <input type ="checkbox" name="marketthulo" value ="marketthulo">Market Thulo<br>#}
+        {#            <input type ="checkbox" name="muncha" value ="muncha">Muncha<br>#}
+        {#            <input type ="checkbox" name="esewapasal" value ="esewapasal">Esewapasal<br>#}
 
+        <input type="text" placeholder="Search" id="search" name="search">
+        <button onclick="openmodal()"><i class="fa fa-search"></i></button>
+        {#            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="search">Search</button>#}
 
-            {% csrf_token %}
-            <input type="text" placeholder="Search" name="search">
-            <button><i class="fa fa-search" type="submit" value="search"></i></button>
-            {#            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="search">Search</button>#}
-        </form>
+    </div>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="modal-open">
+            <span class="close">&times;</span>
+            <h2 class="site-select"> Select atmost 3 sites to compare from</h2>
+            <div class="site-type">
+                <form action="{% url 'search' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" id="search_keyword">
+                    <label>
+                        <input type="radio" name="daraz" value="daraz">
+                        <img src="{% static 'Product/images/daraz.png' %}">
+                        <p class="text-center">Daraz</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="sastodeal" value="sastodeal">
+                        <img src="{% static 'Product/images/sd.png' %}">
+                        <p class="text-center">Sasto Deal</p>
+
+                    </label>
+                    <label>
+                        <input type="radio" name="hamrobazar" value="hamrobazar">
+                        <img src="{% static 'Product/images/hamrobazar.png' %}">
+                        <p class="text-center">Hamrobazar</p>
+
+                    </label>
+                    <label>
+                        <input type="radio" name="dokoman" value="dokoman">
+                        <img src="{% static 'Product/images/dokoman.png' %}">
+                        <p class="text-center">Daraz</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="esewapasal" value="esewapasal">
+                        <img src="{% static 'Product/images/esewapasal.png' %}">
+                        <p class="text-center">Esewapasal</p>
+
+                    </label>
+                    <label>
+                        <input type="radio" name="muncha" value="muncha">
+                        <img src="{% static 'Product/images/muncha.png' %}">
+                        <p class="text-center">Muncha</p>
+
+                    </label>
+                    <button><i class="fa fa-search" type="submit" value="search"></i></button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
 
@@ -48,19 +102,14 @@
             <button disabled>1</button>
             <h4>About Us</h4>
             <p>
-                This about us. This about us. This about us. This about us. This about us. This about us. This about us.
-                This about us. This about us. This about us. This about us. This about us. This about us. This about us.
+
             </p>
         </div>
         <div class="col-md-4">
             <button disabled>2</button>
             <h4>Benefits</h4>
             <p>
-                The ecological benefits of rainwater harvesting are immense. An activity like flushing the toilet, for
-                instance, attributes to about 35% of home water usage. Add up the amount of water used to irrigate the
-                lawn, do laundry, wash cars and the total amount water used is simply astronomical. For businesses, more
-                so hospitality establishments that accommodate a big number of guests in a single location, require a
-                lot of water to satisfy customers. Rainwater harvesting will simply help to fill this gap.
+
             </p>
 
         </div>
@@ -68,9 +117,7 @@
             <button disabled>3</button>
             <h4>Why?</h4>
             <p>
-                Rainwater harvesting systems are considerably easy to maintain since they are not utilized for drinking,
-                cooking or other sensitive uses. This means that they will not need installation of purification
-                systems, which are usually expensive.
+
             </p>
         </div>
 
@@ -78,6 +125,14 @@
 </div>
 
 <script>
+    function openmodal() {
+        console.log($('#search').val());
+        $('#search_keyword').val($('#search').val());
+        console.log($('#search_keyword').val());
+        modal.style.display = "block";
+
+    }
+
     $(document).ready(function () {
         $('.blncleft').delay(500).animate({top: '20%'});
         $('.blncright').delay(500).animate({top: '21%'});
@@ -87,6 +142,32 @@
         $('.calculation-container').addClass('fade-in');
     }, 1200);
     var count = 1;
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 </body>
 </html>
