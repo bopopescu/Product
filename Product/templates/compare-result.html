@@ -1,7 +1,6 @@
 <html>
-<body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-{% load staticfiles %}
+{% load static %}
 <link rel="stylesheet" href="{% static 'Product/style/css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'Product/style/css/harvest.css' %}">
 <link rel="stylesheet" href="{% static 'Product/style/css/style.css' %}">
@@ -9,256 +8,260 @@
 <script src="{% static 'Product/style/js/jquery.min.js' %}"></script>
 <script src="{% static 'Product/style/js/bootstrap.min.js' %}"></script>
 
-
+<body>
+<p id="demo"></p>
 
 <div class="section-wrapper sc-rlt">
-{#    <form action="{% url 'search' %}" method="POST">#}
-{##}
-{#  {% csrf_token %}#}
-{#            <input type="text" placeholder="Search" name="search">#}
-{#        <button><i class="fa fa-search"></i></button>#}
-{#    </form>#}
-     <input type="text" placeholder="Search" id="search" name="search">
+    <input type="text" placeholder="Search" id="search" name="search">
     <button onclick="openmodal()"><i class="fa fa-search"></i></button>
 </div>
-    <div id="myModal" class="modal">
+<div id="myModal" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content" id="modal-open">
-            <span class="close">&times;</span>
-            <h2 class="site-select"> Select atmost 3 sites to compare from</h2>
-            <div class="site-type">
-                <form action="{% url 'search' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="search" id="search_keyword">
-                    <label>
-                        <input type="radio" name="daraz" value="daraz">
-                        <img src="{% static 'Product/images/daraz.png' %}">
-                        <p class="text-center">Daraz</p>
-                    </label>
-                    <label>
-                        <input type="radio" name="sastodeal" value="sastodeal">
-                        <img src="{% static 'Product/images/sd.png' %}">
-                        <p class="text-center">Sasto Deal</p>
+    <!-- Modal content -->
+    <div class="modal-content" id="modal-open">
+        <span class="close" id="myBtn">&times;</span>
+        <h2 class="site-select"> Select atmost 3 sites to compare from</h2>
+        <div class="site-type">
+            <form action="{% url 'search' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="search" id="search_keyword">
+                <label>
+                    <input type="checkbox" name="daraz" value="daraz">
+                    <img src="{% static 'Product/images/daraz.png' %}">
+                    <p class="text-center">Daraz</p>
+                </label>
+                <label>
+                    <input type="checkbox" name="sastodeal" value="sastodeal">
+                    <img src="{% static 'Product/images/sd.png' %}">
+                    <p class="text-center">Sasto Deal</p>
 
-                    </label>
-                    <label>
-                        <input type="radio" name="hamrobazar" value="hamrobazar">
-                        <img src="{% static 'Product/images/hamrobazar.png' %}">
-                        <p class="text-center">Hamrobazar</p>
+                </label>
+                <label>
+                    <input type="checkbox" name="hamrobazar" value="hamrobazar">
+                    <img src="{% static 'Product/images/hamrobazar.png' %}">
+                    <p class="text-center">Hamrobazar</p>
 
-                    </label>
-                    <label>
-                        <input type="radio" name="dokoman" value="dokoman">
-                        <img src="{% static 'Product/images/dokoman.png' %}">
-                        <p class="text-center">Daraz</p>
-                    </label>
-                    <label>
-                        <input type="radio" name="esewapasal" value="esewapasal">
-                        <img src="{% static 'Product/images/esewapasal.png' %}">
-                        <p class="text-center">Esewapasal</p>
+                </label>
+                <label>
+                    <input type="checkbox" name="dokoman" value="dokoman">
+                    <img src="{% static 'Product/images/dokoman.png' %}">
+                    <p class="text-center">Dokoman</p>
+                </label>
+                <label>
+                    <input type="checkbox" name="esewapasal" value="esewapasal">
+                    <img src="{% static 'Product/images/esewapasal.png' %}">
+                    <p class="text-center">Esewapasal</p>
+                </label>
+                <label>
+                    <input type="checkbox" name="muncha" value="muncha">
+                    <img src="{% static 'Product/images/muncha.png' %}">
+                    <p class="text-center">Muncha</p>
 
-                    </label>
-                    <label>
-                        <input type="radio" name="muncha" value="muncha">
-                        <img src="{% static 'Product/images/muncha.png' %}">
-                        <p class="text-center">Muncha</p>
+                </label>
 
-                    </label>
-                    <button><i class="fa fa-search" type="submit" value="search"></i></button>
-                </form>
-            </div>
+                <button class="btn btn-warning " type="submit" data-aos="fade" onclick="addSpinner();"
+                        id="submitButton">
+                    Compare
+                </button>
+            </form>
         </div>
-
     </div>
+
+</div>
+
+</select>
+
 <div class="wrapper">
-{% if display.sastodeal == True %}
-    <div class="comp-card">
-        <div class="sort">
-            <label>Sort by:</label>
-            <select>
-                <option>Cheaper item First</option>
-                <option>Expensive item First</option>
-            </select>
-        </div>
-        <h3>Products from SastoDeal </h3>
-        {% for i in site.sastodeal %}
-        <div class="product-detail">
-            <div class="product-img">
-                <img src="{{ i.image }}" class="img-responsive img-center">
+    {% if display.sastodeal == True %}
+        <div class="comp-card">
+            <div class="sort">
+                <label>Sort by:</label>
+                <select id="order_sastodeal">
+                    <option value="1" selected>Cheaper item first</option>
+                    <option value="-1">Expensive item first</option>
+                </select>
             </div>
-            <div class="product-desc">
-                <h5>{{ i.name }}</h5>
-                <h3>{{ i.price }}</h3>
-                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
+            <h3>Products from SastoDeal </h3>
+            <div class="items_sastodeal">
+                {% for i in site.sastodeal %}
+                    <div class="product-detail">
+                        <div class="product-img">
+                            <img src="{{ i.image }}" class="img-responsive img-center">
+                        </div>
+                        <div class="product-desc">
+                            <h5>{{ i.name }}</h5>
+                            <h3 class='price_sastodeal'>{{ i.price }}</h3>
+                            <a href="{{ i.link }}">
+                                <button>View Product <i class="fa fa-chevron-right"></i></button>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
-        {% endfor %}
 
-
-    </div>
-{% endif %}
-{% if display.hamrobazar == True %}
-    <div class="comp-card">
-        <div class="sort">
-            <label>Sort by:</label>
-            <select>
-                <option>Cheaper item First</option>
-                <option>Expensive item First</option>
-            </select>
         </div>
-        <h3>Products from Hamrobazar</h3>
+    {% endif %}
+    {% if display.hamrobazar == True %}
+        <div class="comp-card">
+            <div class="sort_hamrobazar">
+                <label>Sort by:</label>
+            <select id="order_hamrobazar">
+                    <option value="1" selected>Cheaper item first</option>
+                    <option value="-1">Expensive item first</option>
+                </select>
+            </div>
+
+            <h3>Products from Hamrobazar</h3>
+            <div class ="items_hamrobazar">
             {% for i in site.hamrobazar %}
-        <div class="product-detail">
-            <div class="product-img">
-                <img src="{{ i.image }}" class="img-responsive img-center">
+                <div class="product-detail">
+                    <div class="product-img">
+                        <img src="{{ i.image }}" class="img-responsive img-center">
+                    </div>
+                    <div class="product-desc">
+                        <h5>{{ i.name }}</h5>
+                        <h3 class='price_hamrobazar'>{{ i.price }}</h3>
+                        <a href="https://www.hamrobazar.com/{{ i.link }}">
+                            <button>View Product <i class="fa fa-chevron-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
             </div>
-            <div class="product-desc">
-                <h5>{{ i.name }}</h5>
-                <h3>{{ i.price }}</h3>
-                <a href="https://www.hamrobazar.com/{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
-            </div>
-        </div>
-        {% endfor %}
 
-    </div>
-{% endif %}
+        </div>
+    {% endif %}
+
     {% if display.daraz == True %}
 
-    <div class="comp-card">
-        <div class="sort">
-            <label>Sort by:</label>
-            <select>
-                <option>Cheaper item First</option>
-                <option>Expensive item First</option>
-            </select>
-        </div>
-        <h3>Products from Daraz</h3>
-        {% for i in site.daraz %}
-        <div class="product-detail">
-            <div class="product-img">
-                <img src="{{ i.image }}" class="img-responsive img-center">
+        <div class="comp-card">
+            <div class="sort">
+                <label>Sort by:</label>
+              <select id="order_daraz">
+                    <option value="1" selected>Cheaper item first</option>
+                    <option value="-1">Expensive item first</option>
+              </select>
             </div>
-            <div class="product-desc">
-                <h5>{{ i.name }}</h5>
-                <h3>{{ i.price }}</h3>
-                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
-            </div>
+            <h3>Products from Daraz</h3>
+            <div class = 'items_daraz'>
+            {% for i in site.daraz %}
+                <div class="product-detail">
+                    <div class="product-img">
+                        <img src="{{ i.image }}" class="img-responsive img-center">
+                    </div>
+                    <div class="product-desc">
+                        <h5>{{ i.name }}</h5>
+                        <h3 class = "price_daraz">{{ i.price }}</h3>
+                        <a href="{{ i.link }}">
+                            <button>View Product <i class="fa fa-chevron-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+
         </div>
-        {% endfor %}
-    </div>
-{% endif %}
+        </div>
+    {% endif %}
 
 
-  {% if display.muncha == True %}
+    {% if display.muncha == True %}
+        <div class="comp-card">
+               <div class="sort">
+                <label>Sort by:</label>
+                <select id="order_muncha">
+                    <option value="1" selected>Cheaper item first</option>
+                    <option value="-1">Expensive item first</option>
+                </select>
+            </div>
+            <h3>Product from Muncha</h3>
+            <div class = "items_muncha">
+            {% for i in site.muncha %}
+                <div class="product-detail">
+                    <div class="product-img">
+                        <img src="{{ i.image }}" class="img-responsive img-center">
+                    </div>
+                    <div class="product-desc">
+                        <h5>{{ i.name }}</h5>
+                        <h3 class = "price_muncha">{{ i.price }}</h3>
+                        <a href="{{ i.link }}">
+                            <button>View Product <i class="fa fa-chevron-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
 
-    <div class="comp-card">
-        <div class="sort">
-            <label>Sort by:</label>
-            <select>
-                <option>Cheaper item First</option>
-                <option>Expensive item First</option>
-            </select>
         </div>
-        <h3>Product from Muncha</h3>
-        {% for i in site.muncha %}
-        <div class="product-detail">
-            <div class="product-img">
-                <img src="{{ i.image }}" class="img-responsive img-center">
-            </div>
-            <div class="product-desc">
-                <h5>{{ i.name }}</h5>
-                <h3>{{ i.price }}</h3>
-                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>
-            </div>
         </div>
-        {% endfor %}
-    </div>
-{% endif %}
-{#  {% if display.dokoman == True %}#}
-{##}
-{#    <div class="comp-card">#}
-{#        <div class="sort">#}
-{#            <label>Sort by:</label>#}
-{#            <select>#}
-{#                <option>Cheaper item First</option>#}
-{#                <option>Expensive item First</option>#}
-{#            </select>#}
-{#        </div>#}
-{#        <h3>Products from Dokoman</h3>#}
-{#        {% for i in site.dokoman %}#}
-{#        <div class="product-detail">#}
-{#            <div class="product-img">#}
-{#                <img src="{{ i.image }}" class="img-responsive img-center">#}
-{#            </div>#}
-{#            <div class="product-desc">#}
-{#                <h5>{{ i.name }}</h5>#}
-{#                <h3>{{ i.price }}</h3>#}
-{#                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>#}
-{#            </div>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
-{#{% endif %}#}
-{##}
-{#  {% if display.marketthulo == True %}#}
-{#    <div class="comp-card">#}
-{#        <div class="sort">#}
-{#            <label>Sort by:</label>#}
-{#            <select>#}
-{#                <option>Cheaper item First</option>#}
-{#                <option>Expensive item First</option>#}
-{#            </select>#}
-{#        </div>#}
-{#        <h3>Products from Market Thulo</h3>#}
-{#        {% for i in site.marketthulo %}#}
-{#        <div class="product-detail">#}
-{#            <div class="product-img">#}
-{#                <img src="{{ i.image }}" class="img-responsive img-center">#}
-{#            </div>#}
-{#            <div class="product-desc">#}
-{#                <h5>{{ i.name }}</h5>#}
-{#                <h3>{{ i.price }}</h3>#}
-{#                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>#}
-{#            </div>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
-{#{% endif %}#}
-{#  {% if display.esewapasal == True %}#}
-{##}
-{#    <div class="comp-card">#}
-{#        <div class="sort">#}
-{#            <label>Sort by:</label>#}
-{#            <select>#}
-{#                <option>Cheaper item First</option>#}
-{#                <option>Expensive item First</option>#}
-{#            </select>#}
-{#        </div>#}
-{#        <h3>Products from Esewapasal</h3>#}
-{#        {% for i in site.esewapasl %}#}
-{#        <div class="product-detail">#}
-{#            <div class="product-img">#}
-{#                <img src="{{ i.image }}" class="img-responsive img-center">#}
-{#            </div>#}
-{#            <div class="product-desc">#}
-{#                <h5>{{ i.name }}</h5>#}
-{#                <h3>{{ i.price }}</h3>#}
-{#                <a href="{{ i.link }}" ><button>View Product <i class="fa fa-chevron-right"></i></button></a>#}
-{#            </div>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
-{#{% endif %}#}
+    {% endif %}
+    {% if display.dokoman == True %}
+
+        <div class="comp-card">
+            <div class="sort">
+                <label>Sort by:</label>
+                  <select id="order_dokoman">
+                    <option value="1" selected>Cheaper item first</option>
+                    <option value="-1">Expensive item first</option>
+              </select>
+            </div>
+            <h3>Products from Dokoman</h3>
+            <div class = 'items_dokoman'>
+            {% for i in site.dokoman %}
+                <div class="product-detail">
+                    <div class="product-img">
+                        <img src="{{ i.image }}" class="img-responsive img-center">
+                    </div>
+                    <div class="product-desc">
+                        <h5>{{ i.name }}</h5>
+                        <h3 class="price_dokoman">{{ i.price }}</h3>
+                        <a href="{{ i.link }}">
+                            <button>View Product <i class="fa fa-chevron-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    {% endif %}
+
+
+    {% if display.esewapasal == True %}
+        <div class="comp-card">
+            <div class="sort">
+                <label>Sort by:</label>
+                 <select id="order_esewapasal">
+                    <option value="1" selected>Cheaper item first</option>
+                    <option value="-1">Expensive item first</option>
+              </select>
+            </div>
+            <h3>Products from Esewapasal</h3>
+            <div class = 'items_esewapasal'>
+            {% for i in site.esewapasal %}
+                <div class="product-detail">
+                    <div class="product-img">
+                        <img src="{{ i.image }}" class="img-responsive img-center">
+                    </div>
+                    <div class="product-desc">
+                        <h5>{{ i.name }}</h5>
+                        <h3 class = 'price_esewapasal'>{{ i.price }}</h3>
+                        <a href="{{ i.link }}">
+                            <button>View Product <i class="fa fa-chevron-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    {% endif %}
 </div>
 <script>
-     function openmodal(){
+    function openmodal() {
         console.log($('#search').val());
         $('#search_keyword').val($('#search').val());
         console.log($('#search_keyword').val());
         modal.style.display = "block";
     }
- // Get the modal
+
+    // Get the modal
     var modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
@@ -268,22 +271,141 @@
     var span = document.getElementsByClassName("close")[0];
 
     // When the user clicks the button, open the modal
-    btn.onclick = function() {
+    btn.onclick = function () {
         modal.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
+
+    function addSpinner() {
+        $("#submitButton").html("<i class='fa fa-refresh fa-spin'></i>Fetching Result\n");
+    }
+
+
+    var parent_sastodeal = document.querySelector('.items_sastodeal'),
+        sel_sastodeal = document.querySelector('#order_sastodeal');
+
+    function sortElement_sastodeal() {
+        [].slice.call(parent_sastodeal.children)
+            .sort(function (a, b) {
+                // change return value based on order
+                return sel_sastodeal.value * (getPrice(a) - getPrice(b));
+            }).forEach(function (ele) {
+            parent_sastodeal.appendChild(ele);
+        })
+    }
+
+    function getPrice(ele) {
+        return Number(ele
+                .querySelector('.price_sastodeal')
+                .textContent
+                .replace(/[^\d.]+/g, ''))
+            // .match(/\d*(?:\.\d+)?/)[0]
+            || 0;
+    }
+
+    // initially sort the element
+    sortElement_sastodeal();
+    // bind click event handler
+    sel_sastodeal.addEventListener('change', sortElement_sastodeal);
+
+ var parent_hamrobazar = document.querySelector('.items_hamrobazar'),
+        sel_hamrobazar = document.querySelector('#order_hamrobazar');
+
+    function sortElement_hamrobazar() {
+        [].slice.call(parent_hamrobazar.children)
+            .sort(function (a, b) {
+                // change return value based on order
+                return sel_hamrobazar.value * (getPrice_hamrobazar(a) - getPrice_hamrobazar(b));
+            }).forEach(function (ele) {
+            parent_hamrobazar.appendChild(ele);
+        })
+    }
+
+    function getPrice_hamrobazar(ele) {
+        return Number(ele
+                .querySelector('.price_hamrobazar')
+                .textContent
+                .replace(/[^\d.]+/g, ''))
+            // .match(/\d*(?:\.\d+)?/)[0]
+            || 0;
+    }
+
+    // initially sort the element
+    sortElement_hamrobazar();
+    // bind click event handler
+    sel_hamrobazar.addEventListener('change', sortElement_hamrobazar);
+
+
+    var parent_daraz = document.querySelector('.items_daraz'),
+        sel_daraz = document.querySelector('#order_daraz');
+
+    function sortElement_daraz() {
+        [].slice.call(parent_daraz.children)
+            .sort(function (a, b) {
+                // change return value based on order
+                return sel_daraz.value * (getPrice_daraz(a) - getPrice_daraz(b));
+            }).forEach(function (ele) {
+            parent_daraz.appendChild(ele);
+        })
+    }
+
+    function getPrice_daraz(ele) {
+        return Number(ele
+                .querySelector('.price_daraz')
+                .textContent
+                .replace(/[^\d.]+/g, ''))
+            // .match(/\d*(?:\.\d+)?/)[0]
+            || 0;
+    }
+
+    // initially sort the element
+    sortElement_daraz();
+    // bind click event handler
+    sel_daraz.addEventListener('change', sortElement_daraz);
+
+
+
+    var parent_dokoman = document.querySelector('.items_dokoman'),
+        sel_dokoman = document.querySelector('#order_dokoman');
+
+    function sortElement_dokoman() {
+        [].slice.call(parent_dokoman.children)
+            .sort(function (a, b) {
+                // change return value based on order
+                return sel_dokoman.value * (getPrice_dokoman(a) - getPrice_dokoman(b));
+            }).forEach(function (ele) {
+            parent_dokoman.appendChild(ele);
+        })
+    }
+
+    function getPrice_dokoman(ele) {
+        return Number(ele
+                .querySelector('.price_dokoman')
+                .textContent
+                .replace(/[^\d.]+/g, ''))
+            // .match(/\d*(?:\.\d+)?/)[0]
+            || 0;
+    }
+
+    // initially sort the element
+    sortElement_dokoman();
+    // bind click event handler
+    sel_dokoman.addEventListener('change', sortElement_dokoman);
+
+
 </script>
 </body>
 </html>
+
 

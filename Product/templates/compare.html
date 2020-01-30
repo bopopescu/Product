@@ -1,6 +1,22 @@
 <html>
+<head><title>Compare</title></head>
+    <style>
+        .buttonload {
+            background-color: #4CAF50; /* Green background */
+            border: none; /* Remove borders */
+            color: white; /* White text */
+            padding: 12px 24px; /* Some padding */
+            font-size: 16px; /* Set a font-size */
+        }
+
+        /* Add a right margin to each icon */
+        .fa {
+            margin-left: -12px;
+            margin-right: 8px;
+        }
+    </style>
 <body>
-{% load staticfiles %}
+{% load static %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{% static 'Product/style/css/bootstrap.min.css' %}">
@@ -35,47 +51,51 @@
 
         <!-- Modal content -->
         <div class="modal-content" id="modal-open">
-            <span class="close">&times;</span>
+            <span id="myBtn" class="close">&times;</span>
             <h2 class="site-select"> Select atmost 3 sites to compare from</h2>
             <div class="site-type">
                 <form action="{% url 'search' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="search" id="search_keyword">
                     <label>
-                        <input type="radio" name="daraz" value="daraz">
+                        <input type="checkbox" name="daraz" value="daraz">
                         <img src="{% static 'Product/images/daraz.png' %}">
                         <p class="text-center">Daraz</p>
                     </label>
                     <label>
-                        <input type="radio" name="sastodeal" value="sastodeal">
+                        <input type="checkbox" name="sastodeal" value="sastodeal">
                         <img src="{% static 'Product/images/sd.png' %}">
                         <p class="text-center">Sasto Deal</p>
 
                     </label>
                     <label>
-                        <input type="radio" name="hamrobazar" value="hamrobazar">
+                        <input type="checkbox" name="hamrobazar" value="hamrobazar">
                         <img src="{% static 'Product/images/hamrobazar.png' %}">
                         <p class="text-center">Hamrobazar</p>
 
                     </label>
                     <label>
-                        <input type="radio" name="dokoman" value="dokoman">
+                        <input type="checkbox" name="dokoman" value="dokoman">
                         <img src="{% static 'Product/images/dokoman.png' %}">
                         <p class="text-center">Daraz</p>
                     </label>
                     <label>
-                        <input type="radio" name="esewapasal" value="esewapasal">
+                        <input type="checkbox" name="esewapasal" value="esewapasal">
                         <img src="{% static 'Product/images/esewapasal.png' %}">
                         <p class="text-center">Esewapasal</p>
 
                     </label>
                     <label>
-                        <input type="radio" name="muncha" value="muncha">
+                        <input type="checkbox" name="muncha" value="muncha">
                         <img src="{% static 'Product/images/muncha.png' %}">
                         <p class="text-center">Muncha</p>
 
                     </label>
-                    <button><i class="fa fa-search" type="submit" value="search"></i></button>
+{#                    <button><i class="fa fa-search" type="submit" value="search"></i></button>#}
+
+        <button class="btn btn-warning " type="submit" data-aos="fade" onclick="addSpinner();" id="submitButton">
+            Compare
+        </button>
                 </form>
             </div>
         </div>
@@ -168,6 +188,12 @@
             modal.style.display = "none";
         }
     }
+
+     function addSpinner() {
+
+        $("#submitButton").html("<i class='fa fa-refresh fa-spin'></i>Fetching Result\n");
+    }
+
 </script>
 </body>
 </html>

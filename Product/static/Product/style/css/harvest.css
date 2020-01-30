@@ -140,7 +140,7 @@ body{
 .site-type p{
     margin: 0;
 }
-.site-type input[type=radio]{
+.site-type input[type=checkbox]{
     position: absolute;
     opacity: 0;
     width: 0;
@@ -155,11 +155,11 @@ body{
 
 
 /* IMAGE STYLES */
-.site-type input[type=radio] + img {
+.site-type input[type=checkbox] + img {
     cursor: pointer;
 }
 
 /* CHECKED STYLES */
-.site-type input[type=radio]:checked + img {
+.site-type input[type=checkbox]:checked + img {
     outline: 2px solid #f00;
 }

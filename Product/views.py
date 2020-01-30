@@ -183,8 +183,8 @@ def search(request):
     esewapasal = request.POST.get('esewapasal')
     print(daraz)
     print(hamrobazar)
-    searchsave = SearchQuery.objects.create(search=searchData)
-    searchsave.save()
+    # searchsave = SearchQuery.objects.create(search=searchData)
+    # searchsave.save()
     start = datetime.datetime.now()
     searchd['data'] = searchData
     site = {}
@@ -261,7 +261,7 @@ def search(request):
     # esewapasal_data = t6.run()
 
     print(f'Tme taken: {datetime.datetime.now() - start}')
-    return render(request, 'compare-result.html',{'site':site, 'display':display})
+    return render(request, 'compare-result.html',{'site':site, 'display':display })
 # 'daraz': daraz_data,
 
 class Daraz(Thread):
