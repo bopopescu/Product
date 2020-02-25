@@ -1,0 +1,222 @@
+   .question-container{
+        height: 100%;
+        border-bottom: 1px solid gray;
+        padding: 20px 0;
+        position: relative;
+        display: none;
+        text-align: center;
+
+    }
+    .question-container:first-child{
+        display: block;
+    }
+    .survey-form-container{
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+    }
+    .survey-form{
+        height: 500px;
+        width:80%;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.4);
+        padding: 20px;
+        position: relative;
+
+    }
+    .option-container{
+        position: relative;
+        display: flex;
+        display: -webkit-flex;
+        flex-wrap: wrap;
+        width: 250px;
+        height:64px;
+        align-items: center;
+        transform: translate(-50%,0);
+        left:50%;
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+    .option{
+        position: relative;
+        display: flex;
+        display: -webkit-flex;
+        flex-wrap: wrap;
+        width: 250px;
+        height:64px;
+        align-items: center;
+        transform: translate(-50%,0);
+        left:50%;
+
+    }
+    .option-txt{
+        font-size: 16px;
+        margin: 0;
+        width:70%;
+        text-align: center;
+        z-index: 10;
+        background: transparent;
+    }
+    .option-img{
+        width: 25%;
+        height: auto;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        z-index: 10;
+        background: transparent;
+    }
+    .option-container input[type=radio]{
+        position: relative;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .option-container input[type=radio]:checked + .selected-border {
+        border: 3px solid seagreen;
+        background: lightgoldenrodyellow;
+    }
+    .selected-border{
+        position: absolute;
+        border: 1px solid transparent;
+        top:0;
+        left:0;
+        width: 250px;
+        height:64px;
+        border-radius: 5px;
+
+    }
+    .email-txt{
+        margin-bottom: 15px;
+        outline: none;
+        height:2.5rem;
+        padding:10px;
+        width:100%;
+        background: white;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+    .next-q{
+        background: linear-gradient(to right,darkgreen, seagreen);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        position: absolute;
+        right:20px;
+        /*transform: translate(0,-50%);*/
+        bottom:10%;
+        display: none;
+        z-index: 10;
+        transition: 1s;
+    }
+    .next-q:hover,.previous-q:hover{
+        cursor: pointer;
+    }
+
+    .next-q:hover span .fa{
+        position: relative;
+        animation: move-right 1s infinite;
+    }
+    .previous-q:hover span .fa{
+        position: relative;
+        animation: move-left 1s infinite;
+    }
+
+    @keyframes move-right {
+        0%{
+            right: 0;
+        }
+
+        50%{
+            right: -20px;
+
+        }
+
+        100%{
+            right:0;
+
+        }
+
+    }
+    @keyframes move-right {
+        0%{
+            right: 0;
+        }
+
+        50%{
+            right: -20px;
+
+        }
+
+        100%{
+            right:0;
+
+        }
+    }
+    @keyframes move-left {
+        0%{
+            left: 0;
+        }
+
+        50%{
+            left: -20px;
+
+        }
+
+        100%{
+            left:0;
+
+        }
+    }
+    .previous-q{
+        background: linear-gradient(to right,darkgreen, seagreen);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        position: absolute;
+        left:20px;
+        /*transform: translate(0,-50%);*/
+        bottom:10%;
+        display: none;
+        z-index: 10;
+        transition: 1s;
+    }
+    .option-container textarea{
+        width:100%;
+        height:100%;
+        outline: none;
+        border: none;
+    }
+    .option-container input[type=submit]{
+        border:none;
+        padding: 15px;
+        border-radius: 25px;
+        text-align: center;
+        width:100%;
+        color: white;
+        text-transform: uppercase;
+        background: linear-gradient(to right, #6b2f2f, #0757ab);
+        transition: 1s;
+
+    }
+    .option-container input[type=submit]:hover{
+        transition: 1s;
+        background: linear-gradient(to left, #6b2f2f, #0757ab);
+
+    }
+    .feedback{
+        width:80%;
+        height:200px;
+
+    }
+    .feedback .option{
+
+        width:100%;
+        height:100%;
+        margin-bottom: 20px;
+    }
+    .feedback-txt{
+        font-weight: normal;
+        padding: 10px;
+    }

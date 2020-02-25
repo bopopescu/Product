@@ -20,6 +20,9 @@ from Product import views
 urlpatterns = [
     path('', views.product, name='product'),
     path('search', views.search, name='search'),
-    # path('daraz', views.   daraz, name='daraz'),
+    path('feedback', views.feedback, name='feedback'),
+    path('feedback_data', views.feedback_data, name='feedback_data'),
+    path('feedback_list', views.feedback_list, name='feedback_list'),
+    path('won', views.won, name='won')
 
 ]

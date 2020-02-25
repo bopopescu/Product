@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% load staticfiles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<link rel="stylesheet" href="{% static 'Product/style/css/question.css' %}">
+<script src="{% static 'Product/style/js/jquery.min.js' %}"></script>
+<script src="{% static 'Product/style/js/bootstrap.min.js' %}"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="{% static 'Product/style/js/prize.js' %}"></script>
+
+<body>
+{#<div class="survey-form-container">#}
+{#    <div class="survey-form">#}
+{#        <form method="POST" action="{% url 'feedback_data' %}">#}
+{#            {% csrf_token %}#}
+{#            <div class="question-container">#}
+{#                <h3>1. How  good is the UI?</h3>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="ques_1" id="ques_1" value="Best Eva!!!!!!">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Besttttt Everrrrr</p>#}
+{#                        <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="ques_1" id="ques_1" value="Best">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Best</p>#}
+{#                        <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container" >#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="ques_1" id="ques_1" value="Never">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Never</p>#}
+{#                        <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="ques_1" id="ques_1" value="Neverrrrrrrrr">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Neverrrrrrrr</p>#}
+{#                        <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            ________________#}
+{##}
+{#            <div class="question-container">#}
+{#                <h3>2. The app works fine and gives the result as expected?</h3>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question2" id="question2" value="Besttttt Everrrrr">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Besttttt Everrrrr</p>#}
+{#                        <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question2" id="question2" value="Best">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Best</p>#}
+{#                        <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container" >#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question2" id="question2" value="Never">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Never</p>#}
+{#                        <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question2" id="question2" value="Neverrrrrrrr">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Neverrrrrrrr</p>#}
+{#                        <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#            </div>#}
+{#-----------------------#}
+{##}
+            {#            ________________#}
+{##}
+{#            <div class="question-container">#}
+{#                <h3>3. This app can be helpful in the real world market?</h3>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question3" id="question3" value="Besttttt Everrrrr">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Besttttt Everrrrr</p>#}
+{#                        <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question3" id="question3" value="Best">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Best</p>#}
+{#                        <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container" >#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question3" id="question3" value="Never">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Never</p>#}
+{#                        <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question3" id="question3" value="Neverrrrrrrr">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Neverrrrrrrr</p>#}
+{#                        <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#            </div>#}
+{#-----------------------#}
+{##}
+            {#            ________________#}
+{##}
+{#            <div class="question-container">#}
+{#                <h3>4. After using the site, you’ll prefer to compare products before buying online.</h3>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question4" id="question4" value="Besttttt Everrrrr">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Besttttt Everrrrr</p>#}
+{#                        <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question4" id="question4" value="Best">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Best</p>#}
+{#                        <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container" >#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question4" id="question4" value="Never">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Never</p>#}
+{#                        <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="option-container">#}
+{#                    <label class="option">#}
+{#                        <input type="radio" name="question4" id="question4" value="Neverrrrrrrr">#}
+{#                        <span class="selected-border"></span>#}
+{#                        <p class="option-txt">Neverrrrrrrr</p>#}
+{#                        <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">#}
+{#                    </label>#}
+{#                </div>#}
+{#            </div>#}
+{#-----------------------#}
+{#            <input type="text" placeholder="Feedback here" name="feedback" id="feedback">#}
+{#    <input type="submit" value="Send Feedback">#}
+{##}
+{##}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
+{% if emdup %}
+    <script>alert('Number has been used already!! Try again with another number')</script>
+{% endif %}
+<div class="survey-form-container">
+    <div class="survey-form">
+        <div id="next" class="next-q w3-animate-zoom">
+            <span>Next <i class="fa fa-arrow-right"></i> </span>
+        </div>
+        <div id="prev" class="previous-q w3-animate-zoom">
+            <span><i class="fa fa-arrow-left"></i>Previous  </span>
+
+        </div>
+        <form method="POST" action="{% url 'feedback_data' %}">
+{#     {% csrf_token %}#}
+
+
+
+            <div id="qes1" class="question-container w3-animate-right">
+                <h3>1. Your User Experience regarding compare</h3>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" name="ques_1" id="ques_1" value="Best Eva!!!!!!">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Besttttt Everrrrr</p>
+                        <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" name="ques_1" id="ques_1" value="Best">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Best</p>
+                        <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" name="opt1" name="ques_1" id="ques_1" value="Never">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Never</p>
+                        <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" name="ques_1" id="ques_1" value="Neverrrrrrr">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Neverrrrrrrr</p>
+                        <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+
+            </div>
+            <div class="question-container w3-animate-right">
+                    <h3>2. The app works fine and gives the result as expected?</h3>
+                    <div class="option-container">
+                        <label class="option">
+                            <input type="radio" id="question2" value="Best Eva!!!!!!" name="question2">
+                            <span class="selected-border"></span>
+                            <p class="option-txt">Besttttt Everrrrr</p>
+                            <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">
+                        </label>
+                    </div>
+                    <div class="option-container">
+                        <label class="option">
+                            <input type="radio" id="question2" value="Best" name="question2">
+                            <span class="selected-border"></span>
+                            <p class="option-txt">Best</p>
+                            <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">
+                        </label>
+                    </div>
+                    <div class="option-container">
+                        <label class="option">
+                            <input type="radio" id="question2" value="Never" name="question2">
+                            <span class="selected-border"></span>
+                            <p class="option-txt">Never</p>
+                            <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">
+                        </label>
+                    </div>
+                    <div class="option-container">
+                        <label class="option">
+                            <input type="radio" id="question2" value="Neverrrrrrr" name="question2">
+                            <span class="selected-border"></span>
+                            <p class="option-txt">Neverrrrrrrr</p>
+                            <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">
+                        </label>
+                    </div>
+
+            </div>
+            <div class="question-container w3-animate-right">
+                <h3>3. This app can be helpful in the real world market?</h3>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio"  id="question3" value="Best Eva!!!!!!" name="question3">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Besttttt Everrrrr</p>
+                        <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio"  id="question3" value="Best" name="question3">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Best</p>
+                        <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio"  id="question3" value="Never" name="question3">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Never</p>
+                        <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio"  id="question3" value="Neverrrrrrr" name="question3">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Neverrrrrrrr</p>
+                        <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+
+            </div>
+            <div class="question-container w3-animate-right">
+                <h3>4. After using the site, you’ll prefer to compare products before buying online.</h3>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" id="question4" value="Best Eva!!!!!!" name="question4">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Besttttt Everrrrr</p>
+                        <img src="{% static 'Product/images/best-ever.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" id="question4" value="Best" name="question4">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Best</p>
+                        <img src="{% static 'Product/images/best.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" id="question4" value="Never" name="question4">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Never</p>
+                        <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+                <div class="option-container">
+                    <label class="option">
+                        <input type="radio" id="question4" value="Neverrrrrrr" name="question4">
+                        <span class="selected-border"></span>
+                        <p class="option-txt">Neverrrrrrrr</p>
+                        <img src="{% static 'Product/images/neverr.png' %}" class="img-responsive option-img">
+                    </label>
+                </div>
+
+            </div>
+            <div class="question-container w3-animate-right">
+                <h3>5. Feedback regarding this product</h3>
+                <div class="option-container feedback">
+                    <label class="option width100">
+                        <span class="selected-border"></span>
+                        <textarea class="feedback-txt" placeholder="Your feedback here..."  name="feedback"></textarea>
+                    </label>
+            <input type="number" class="email-txt" placeholder="Enter your number here....." name="email"  required >
+            <input type="hidden" id="prizeAmt" value="" name="prize">
+                    <input type="submit" placeholder="Submit Your Answers" id="clickme" onclick="generatetoken()">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+
+    $(function () {
+        $(".question-container .option input").click(function () {
+            if (($('.question-container .option input').is(":checked"))&& ($(".question-container:visible").next().length != 0)) {
+                $(".next-q").show();
+                console.log("CHecked");
+            }
+            else {
+                $(".next-q").hide();
+                console.log("NOT CHecked");
+            }
+        });
+    });
+    $(document).ready(function(){
+        $(".question-container").each(function(e) {
+            if (e != 0)
+                $(this).hide();
+        });
+
+
+            if ($(".question-container:visible").next().length != 0){
+                $("#next").click(function(){
+                    $(".question-container:visible").next().show().prev().hide();
+                    $(".previous-q").show();
+                    $(".next-q").hide();
+
+
+                    if($('.question-container:last').is(':visible'))
+                    {
+                        $(".next-q").hide();
+                        console.log("Hiddden last next");
+
+                    }
+                    if (($('.question-container:visible .option input').is(":checked"))&& ($(".question-container:visible").next().length != 0)) {
+                        $(".next-q").show();
+                    }
+
+
+                });
+
+            }
+
+    });
+
+    $(document).ready(function () {
+        if($('.question-container:first').is(':visible'))
+        {
+            $(".previous-q").hide();
+            console.log("Hide");
+
+        }
+
+            $("#prev").click(function () {
+
+                if(($(".question-container:first"))&& ($('.question-container .option input').is(":checked"))){
+                    $(".next-q").show();
+
+                    console.log("HEREEE OK");
+                }
+                if ($(".question-container:visible").prev().length != 0) {
+                    $(".question-container:visible").prev().show().next().hide();
+                    if($('.question-container:first').is(':visible'))
+                    {
+                        $(".previous-q").hide();
+                        console.log("Hiddden first prev");
+
+                    }
+                }
+
+            });
+
+    });
+
+</script>
+</body>
+</html>

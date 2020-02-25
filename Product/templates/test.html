@@ -5,5 +5,42 @@
     <title>Title</title>
 </head>
 <body>
+<form method="POST" action="{% url 'feedback_data' %}">
+    {% csrf_token %}
+    <input type = 'text' name="email" placeholder="Enter your email"><br>
+
+<label id="ques_1">1. How  good is the UI?</label><br><br>
+<input type="radio" id="ques_1" value="Best Eva!!!!!!" name="ques_1">Best Eva!!!!!!<br>
+<input type="radio" id="ques_1" value="Best!!" name="ques_1">Best!!<br>
+<input type="radio" id="ques_1" value="Never!!" name="ques_1">Never!!<br>
+<input type="radio" id="ques_1" value="Nevaaaarrr!!" name="ques_1">Nevaaaarrr!!<br><br>
+
+<label id="question2">2. The app works fine and gives the result as expected?
+</label><br><br>
+
+<input type="radio" id="question2" value="Best Eva!!!!!!" name="question2">Best Eva!!!!!!<br>
+<input type="radio" id="question2" value="Best!!" name="question2">Best!!<br>
+<input type="radio" id="question2" value="Never!!" name="question2">Never!!<br>
+<input type="radio" id="question2" value="Nevaaaarrr!!" name="question2">Nevaaaarrr!!<br><br>
+
+<label id="question3">3. This app can be helpful in the real world market?</label><br><br>
+
+<input type="radio" id="question3" value="Best Eva!!!!!!" name="question3">Best Eva!!!!!!<br>
+<input type="radio" id="question3" value="Best!!" name="question3">Best!!<br>
+<input type="radio" id="question3" value="Never!!" name="question3">Never!!<br>
+<input type="radio" id="question3" value="Nevaaaarrr!!" name="question3">Nevaaaarrr!!<br><br>
+
+
+<label id="question4">4. After using the site, you’ll prefer to compare products before buying online.
+</label><br><br>
+
+<input type="radio" id="question4" value="Best Eva!!!!!!" name="question4">Best Eva!!!!!!<br>
+<input type="radio" id="question4" value="Best!!" name="question4">Best!!<br>
+<input type="radio" id="question4" value="Never!!" name="question4">Never!!<br>
+<input type="radio" id="question4" value="Nevaaaarrr!!" name="question4">Nevaaaarrr!!<br><br>
+<input type = "text" name="feedback" placeholder="Feedback"><br>
+
+<input type="submit" value="Send Feedback">
+</form>
 </body>
 </html>

@@ -1,0 +1,85 @@
+<html>
+<body>
+<h1>Result</h1>
+<h3>Q1. How  good is the UI?</h3>
+<table border="1">
+<tr>
+<th>Option</th>
+<th>Count</th>
+</tr>
+{% for i in c1 %}
+    <tr>
+    <td>{{ i.question_1}}</td>
+    <td>{{ i.c}}</td>
+    </tr>
+{% endfor %}
+
+</table>
+<h3>Q.2 The app works fine and gives the result as expected?</h3>
+<table border="1">
+<tr>
+<th>Option</th>
+<th>Count</th>
+</tr>
+{% for i in c2 %}
+    <tr>
+    <td>{{ i.question_2}}</td>
+    <td>{{ i.c}}</td>
+    </tr>
+{% endfor %}
+
+</table>
+
+<h3>Q.3 This app can be helpful in the real world market?</h3>
+<table border="1">
+<tr>
+<th>Option</th>
+<th>Count</th>
+</tr>
+{% for i in c3 %}
+    <tr>
+    <td>{{ i.question_3}}</td>
+    <td>{{ i.c}}</td>
+    </tr>
+{% endfor %}
+
+</table>
+
+<h3>Q.4 After using the site, you’ll prefer to compare products before buying online.</h3>
+<table border="1">
+<tr>
+<th>Option</th>
+<th>Count</th>
+</tr>
+{% for i in c4 %}
+    <tr>
+    <td>{{ i.question_4}}</td>
+    <td>{{ i.c}}</td>
+    </tr>
+{% endfor %}
+
+</table>
+<h3> General Feedback</h3>
+{% for i in feed %}
+    -{{ i.feedback}} <br>
+{% endfor %}
+<h3>Contact List</h3>
+{% for i in email %}
+    -{{ i.email }}<br>
+{% endfor %}
+<h3>Result list</h3>
+<table border="1">
+    <tr>
+        <th>Contact</th>
+        <th>Result</th>
+    </tr>
+     {% for i in result %}
+     <tr>
+    <td>{{ i.email }}</td>
+    <td>{{ i.prize }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+</body>
+</html>
