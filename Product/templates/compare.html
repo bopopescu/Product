@@ -68,7 +68,7 @@
 
         <!-- Modal content -->
         <div class="modal-content" id="modal-open">
-            <span id="myBtn" class="close">&times;</span>
+            <span id="myBtn" class="close" >&times;</span>
             <h2 class="site-select"> Select atmost 3 sites to compare from</h2>
             <div class="site-type">
                 <form action="{% url 'search' %}" method="POST">
@@ -197,12 +197,16 @@ As the number of e-commerce sites is increasing, the users are having trouble fi
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
+        window.location.reload();
         modal.style.display = "none";
+
+
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {
+            window.location.reload();
             modal.style.display = "none";
         }
     }

@@ -14,8 +14,19 @@
 
 <div class="section-wrapper sc-rlt">
     <input type="text" placeholder="Search" id="search" name="search">
-    <button onclick="openmodal()"><i class="fa fa-search"></i></button>
-    <a href ="{% url 'feedback' %}"><button><i class="fa fa-comments"></i></button></a>
+    <button onclick="openmodal()"><i class="fa fa-search"></i></button><br>
+    <div class="row" style="height: 20%">
+        <div class="col-lg-2">
+            <a href ="{% url 'feedback' %}"><img src = "{% static 'Product/images/clickhere.png' %}" class="blink-image" ></a>
+        </div>
+             <div class="col-lg-8" style="height: 100%">
+            <marquee direction = "left" scrollamount="15" style="position: relative; transform: translate(0, -50%); top:30%" ><b style="font-size: 40px">WIN EXCITING PRICE BY PROVIDING US FEEDBACK!!!</b></marquee></span>
+        </div>
+
+    </div>
+{#    <marquee direction = "right"> <a href ="{% url 'feedback' %}"><button><i class="fa fa-comments"></i></button></a></marquee>#}
+
+
 
 
 
@@ -303,11 +314,13 @@
 
     // When the user clicks the button, open the modal
     btn.onclick = function () {
+        window.location.reload();
         modal.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
+        window.location.reload();
         modal.style.display = "none";
     }
 

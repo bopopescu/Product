@@ -104,7 +104,7 @@
         box-shadow: 0 12px 18px rgba(0,0,0,0.12);
     }
     .sc-rlt input{
-        width:79%;
+        width:86%;
         outline: none;
         height: 4rem;
         padding:5px;
@@ -114,7 +114,7 @@
         opacity:0.8;
     }
     .sc-rlt button {
-        width:5%;
+        width:12%;
         color:white;
         background: dodgerblue;
         display: inline-block;
@@ -165,3 +165,20 @@
 
     }
 
+@keyframes blink {
+    0% {
+        opacity:1;
+    }
+    50% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+.blink-image {
+    -moz-animation: blink normal 2s infinite ease-in-out; /* Firefox */
+    -webkit-animation: blink normal 2s infinite ease-in-out; /* Webkit */
+    -ms-animation: blink normal 2s infinite ease-in-out; /* IE */
+    animation: blink normal 2s infinite ease-in-out; /* Opera and prob css3 final iteration */
+}

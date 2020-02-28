@@ -2,7 +2,7 @@ import re
 import urllib
 from threading import Thread
 import json
-
+import random
 from django.db.models import Count
 from django.http import request
 from django.shortcuts import render, redirect
@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 # Create your views here.
 import datetime
-from .models import SearchQuery, Feedback
+from .models import SearchQuery, Feedback, IP
 from django.views.decorators.csrf import csrf_exempt
 from uuid import getnode as get_mac
 
@@ -18,12 +18,12 @@ from joblib import Parallel, delayed
 
 searchd = {}
 
-
 def product(request):
     return render(request, 'compare.html')
 
 
 def search(request):
+    ip_list = []
     searchData = request.POST.get('search')
     print(searchData)
     daraz = request.POST.get('daraz')
@@ -42,6 +42,7 @@ def search(request):
     site = {}
     display = {}
     if (daraz == 'daraz'):
+
         t1 = Daraz()
         t1.start()
         daraz_data = t1.run()
@@ -152,7 +153,9 @@ def search(request):
             dokoman_data_status = False
     except:
         print('error')
-
+    ip_client = (get_client_ip(request))
+    ip_save = IP.objects.create(ip_address=ip_client)
+    ip_save.save()
     print(f'Tme taken: {datetime.datetime.now() - start}')
     return render(request, 'compare-result.html',{'site':site, 'display':display, 'daraz_st': daraz_data_status, 'hamrobazar_st': hamrobazar_data_status, 'sastodeal_st': sasto_data_status, 'muncha_st': muncha_data_status, 'dokoman_st': dokoman_data_status, 'esewapasal_st': esewapasal_data_status})
     # return render(request, 'compare-result.html', {'site':site, 'display': display})
@@ -420,13 +423,14 @@ class Muncha(Thread):
 
         for i, n, p, l in zip(muncha_image_list, muncha_name_list, muncha_price_list, muncha_link_list):
             temp = {
-                'image' : i,
-                'name' : n,
-                'price' : p,
-                'link' : l
+                'image': i,
+                'name': n,
+                'price': p,
+                'link': l
             }
             muncha_data.append(temp)
         return muncha_data
+
 
 class Esewapasal(Thread):
     def run(self):
@@ -543,19 +547,15 @@ def feedback_data(request):
     question_3 = request.POST['question3']
     question_4 = request.POST['question4']
     feedback = request.POST['feedback']
-    ip1= request.POST['prize']
-    print(ip1)
-    ip = int(ip1)
-    if (ip == 0 or ip == 60):
+    ip= random.randint(100, 200)
+    if (ip == 100 or ip == 160):
         prize = '50 rupee'
-    elif (ip >= 10 and ip <= 40):
+    elif (ip >= 101 and ip <= 140):
         prize = '10 rupee'
-    elif (ip >= 50 and ip <= 55):
+    elif (ip >= 150 and ip <= 155):
         prize = '20 rupee'
     else:
         prize = 'Try Again'
-
-
     number = Feedback.objects.filter(email= email).count()
     if (number > 0):
         context = {'emdup': True}
@@ -563,7 +563,7 @@ def feedback_data(request):
 
     feed = Feedback.objects.create(email= email,question_1=question_1, question_2=question_2, question_3=question_3, question_4=question_4, feedback=feedback, prize=prize)
     feed.save()
-    context = { "prize": prize}
+    context = {"prize": prize}
     return render(request, 'compare.html', context)
 
 @csrf_exempt
@@ -579,8 +579,10 @@ def feedback_list(request):
     feed = Feedback.objects.filter(feedback__isnull=False).values('feedback')
     email = Feedback.objects.filter(email__isnull=False).values('email')
     result = Feedback.objects.filter(email__isnull=False).values('email', 'prize')
-    return render(request, 'feedback_list.html', {'feed': feed,'c1': c1, 'c2': c2, 'c3': c3, 'c4': c4, 'email' : email, 'result':result})
+    ip_count = IP.objects.count()
+    return render(request, 'feedback_list.html', {'feed': feed,'c1': c1, 'c2': c2, 'c3': c3, 'c4': c4, 'email' : email, 'result':result, 'ip_count': ip_count})
 
+count =0
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

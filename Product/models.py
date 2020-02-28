@@ -13,3 +13,6 @@ class Feedback(models.Model):
     feedback = models.TextField(max_length=150, null= True)
     prize = models.CharField(max_length=150, null=True)
 
+class IP(models.Model):
+    ip_address = models.CharField(max_length=200, null=True)
+
