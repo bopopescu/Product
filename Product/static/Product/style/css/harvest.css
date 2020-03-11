@@ -110,6 +110,10 @@ body{
     border: 1px solid #888;
     width: 80%;
 }
+#exampleModal .modal-content,#exampleModal .modal-header,#exampleModal .modal-footer{
+    background: transparent;
+    border: none;
+}
 
 /* The Close Button */
 .close {
@@ -163,3 +167,4 @@ body{
 .site-type input[type=checkbox]:checked + img {
     outline: 2px solid #f00;
 }
+

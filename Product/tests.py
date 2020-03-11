@@ -102,28 +102,30 @@ from selenium import webdriver
 # outdata.addPage(pages[0])
 # outdata.write()
 
-import re
-from collections import Counter
-class Daraz():
-    def run(self):
-        urlpage = 'https://www.daraz.com.np/catalog/?q=shampoo&_keyori=ss&from=input&spm=a2a0e.searchlist.search.go.545a77524tE5ep'
-        page = urllib.request.urlopen(urlpage)
-        soup = BeautifulSoup(page, 'html.parser')
-        data = soup.select('script')
-
-        list = []
-        for i in data:
-            list.append(i)
-
-        a = (str(list[3]))[24:-9]
-        list1 = (json.loads(a))["mods"]["listItems"]
-        data = [{"name": x["name"], "link": x["productUrl"], "price": x["price"], "image": x["image"]} for x in
-                      list1]
-        daraz_data1 =json.dumps(data)
-        daraz_data = json.loads(daraz_data1)
-        print(bool(data))
-        return daraz_data
-
-d = Daraz()
-print(d.run())
+# import re
+# from collections import Counter
+# class Daraz():
+#     def run(self):
+#         s = 'bean bag'
+#         search_item = s.replace(" ", "")
+#         urlpage = 'https://www.daraz.com.np/catalog/?q='+ search_item+ '&_keyori=ss&from=input&spm=a2a0e.searchlist.search.go.545a77524tE5ep'
+#         page = urllib.request.urlopen(urlpage)
+#         soup = BeautifulSoup(page, 'html.parser')
+#         data = soup.select('script')
+#
+#         list = []
+#         for i in data:
+#             list.append(i)
+#
+#         a = (str(list[3]))[24:-9]
+#         list1 = (json.loads(a))["mods"]["listItems"]
+#         data = [{"name": x["name"], "link": x["productUrl"], "price": x["price"], "image": x["image"]} for x in
+#                       list1]
+#         daraz_data1 =json.dumps(data)
+#         daraz_data = json.loads(daraz_data1)
+#         print(bool(data))
+#         return daraz_data
+#
+# d = Daraz()
+# print(d.run())
 

@@ -194,10 +194,6 @@
 
         </div>
         <form method="POST" action="{% url 'feedback_data' %}">
-{#     {% csrf_token %}#}
-
-
-
             <div id="qes1" class="question-container w3-animate-right">
                 <h3>1. Your User Experience regarding compare</h3>
                 <div class="option-container">
@@ -218,7 +214,7 @@
                 </div>
                 <div class="option-container">
                     <label class="option">
-                        <input type="radio" name="opt1" name="ques_1" id="ques_1" value="Never">
+                        <input type="radio" name="ques_1" name="ques_1" id="ques_1" value="Never">
                         <span class="selected-border"></span>
                         <p class="option-txt">Never</p>
                         <img src="{% static 'Product/images/neva.png' %}" class="img-responsive option-img">

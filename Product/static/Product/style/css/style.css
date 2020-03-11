@@ -182,3 +182,14 @@
     -ms-animation: blink normal 2s infinite ease-in-out; /* IE */
     animation: blink normal 2s infinite ease-in-out; /* Opera and prob css3 final iteration */
 }
+
+.modal-footer{
+    border-top: none;
+}
+modal-content{
+    background-color: transparent;
+}
+.modal-header{
+    border-bottom: none ;
+}
+

@@ -38,15 +38,36 @@
 {% if prize  %}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-content" style="background-color: transparent; box-shadow: none">
+      <div class="modal-header" style="border-bottom: none">
+        <h3 class="modal-title" id="exampleModalLabel" style="color: white; text-align: center"> Calculating your reward.....</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-modal">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <p>{{ prize }}</p>
+          <img src="{% static 'Product/images/11.gif' %}" width="30%" style="width: 80%; padding-left: 10%; height: auto">
+
+      </div>
+      <div class="modal-footer" style="border-top: none";>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+{#          <img src="{% static 'Product/images/11.gif' %}" width="30%" style="width: 80%; padding-left: 10%; height: auto">#}
+    {{ prize }}
       </div>
       <div class="modal-footer">
       </div>
@@ -57,8 +78,9 @@
 
 <div class="top-half">
     <div class="banner-txt">
-        <h1>Compare the price <br>
-        </h1>
+        <img src="{% static 'Product/images/Pricetack.png' %}" width="200px">
+{#        <h1>Compare the price <br>#}
+{#        </h1>#}
     </div>
     <div class="calculation-container">
         <input type="text" placeholder="Search" id="search" name="search">
@@ -108,7 +130,6 @@
                         <p class="text-center">Muncha</p>
 
                     </label>
-{#                    <button><i class="fa fa-search" type="submit" value="search"></i></button>#}
 
         <button class="btn btn-warning " type="submit" data-aos="fade" onclick="addSpinner();" id="submitButton">
             Compare
@@ -126,9 +147,6 @@
     <div class="blncbase">
         <img src="{% static 'Product/images/compare/base.png' %}" class="img-responsive">
     </div>
-    <!--    <div class="blncright">-->
-    <!--        <img src="images/compare/pan-right.png" class="img-responsive">-->
-    <!--    </div>-->
 </div>
 
 <div class="container">
@@ -225,8 +243,16 @@ As the number of e-commerce sites is increasing, the users are having trouble fi
 
     $(window).on('load',function(){
         $('#exampleModal').modal('show');
+        setTimeout(alertresult,2500);
+
     });
 
+    function alertresult() {
+        $('#exampleModal').modal('hide');
+        $('#exampleModal1').modal('show');
+
+       {#alert("{{ prize }}");#}
+    }
 </script>
 </body>
 </html>

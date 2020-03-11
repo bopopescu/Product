@@ -216,7 +216,9 @@ def search(request):
 
 class Daraz(Thread):
     def run(self):
-        urlpage = 'https://www.daraz.com.np/catalog/?q='+searchd['data']+'&_keyori=ss&from=input&spm=a2a0e.searchlist.search.go.545a77524tE5ep'
+        s = searchd['data']
+        search_item = s.replace(" ", "")
+        urlpage = 'https://www.daraz.com.np/catalog/?q='+search_item+'&_keyori=ss&from=input&spm=a2a0e.searchlist.search.go.545a77524tE5ep'
         page = urllib.request.urlopen(urlpage)
         soup = BeautifulSoup(page, 'html.parser')
         data = soup.select('script')
@@ -548,14 +550,14 @@ def feedback_data(request):
     question_4 = request.POST['question4']
     feedback = request.POST['feedback']
     ip= random.randint(100, 200)
-    if (ip == 100 or ip == 160):
-        prize = '50 rupee'
-    elif (ip >= 101 and ip <= 140):
-        prize = '10 rupee'
+    if (ip == 160):
+        prize = 'Congratulation!!! you won balance of Rs. 50. The money will be transferred to your number soon.'
+    elif (ip >= 101 and ip <= 125):
+        prize = 'Congratulation!!! you won balance of Rs. 50. The money will be transffered to your number soon.'
     elif (ip >= 150 and ip <= 155):
-        prize = '20 rupee'
+        prize = 'Congratulation!!! you won balance of Rs. 50. The money will be transferred to your number soon.'
     else:
-        prize = 'Try Again'
+        prize = 'Sorry, you could not win any prizes. However, we are greatfull for your feedback'
     number = Feedback.objects.filter(email= email).count()
     if (number > 0):
         context = {'emdup': True}
